@@ -745,7 +745,7 @@ static ssize_t uv__writev_mittcpu(int fd, struct iovec* vec, size_t n) {
   if (n == 1)
     return write(fd, vec->iov_base, vec->iov_len);
   else
-    return writev(fd, vec, n);
+    return writev(fd, vec, -n);
 }
 
 
