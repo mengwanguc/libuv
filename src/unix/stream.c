@@ -749,8 +749,12 @@ static ssize_t uv__writev_mittcpu(int fd, struct iovec* vec, size_t n) {
 
   if (n == 1)
     return write(fd, vec->iov_base, vec->iov_len);
-  else
-    return syscall(666, fd, vec, n);
+  else {
+    ssize_t ret = syscall(666, fd, vec, n);
+    printf("~~~~~~ret: %d\n", ret);
+    printf("~~~~~~errno: %d\n",errno);
+    perror("~~~~~~uv_writev_mittcpu error: ");
+    return ret;
 }
 
 
