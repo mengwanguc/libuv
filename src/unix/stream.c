@@ -709,7 +709,7 @@ static void uv__drain(uv_stream_t* stream) {
   }
 }
 
-void backtrace(void)
+void backtrace_meng(void)
        {
            int j, nptrs;
            void *buffer[20];
@@ -731,7 +731,7 @@ void backtrace(void)
 
 
 static ssize_t uv__writev(int fd, struct iovec* vec, size_t n) {
-  backtrace();
+  backtrace_meng();
 
   if (n == 1)
     return write(fd, vec->iov_base, vec->iov_len);
