@@ -22,6 +22,8 @@
 #include "uv.h"
 #include "internal.h"
 
+#include <execinfo.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -707,8 +709,30 @@ static void uv__drain(uv_stream_t* stream) {
   }
 }
 
+void backtrace(void)
+       {
+           int j, nptrs;
+           void *buffer[20];
+           char **strings;
+
+           nptrs = backtrace(buffer, BT_BUF_SIZE);
+           printf("backtrace() returned %d addresses\n", nptrs);
+
+           /* The call backtrace_symbols_fd(buffer, nptrs, STDOUT_FILENO)
+              would produce similar output to the following: */
+
+           strings = backtrace_symbols(buffer, nptrs);
+
+           for (j = 0; j < nptrs; j++)
+               printf("%s\n", strings[j]);
+
+           free(strings);
+       }
+
 
 static ssize_t uv__writev(int fd, struct iovec* vec, size_t n) {
+  backtrace();
+
   if (n == 1)
     return write(fd, vec->iov_base, vec->iov_len);
   else
