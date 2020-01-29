@@ -715,7 +715,7 @@ void backtrace_meng(void)
            void *buffer[20];
            char **strings;
 
-           nptrs = backtrace(buffer, BT_BUF_SIZE);
+           nptrs = backtrace(buffer, 20);
            printf("backtrace() returned %d addresses\n", nptrs);
 
            /* The call backtrace_symbols_fd(buffer, nptrs, STDOUT_FILENO)
