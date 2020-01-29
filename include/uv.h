@@ -508,6 +508,14 @@ UV_EXTERN int uv_write(uv_write_t* req,
                        const uv_buf_t bufs[],
                        unsigned int nbufs,
                        uv_write_cb cb);
+
+UV_EXTERN int uv_write_mittcpu(uv_write_t* req,
+                       uv_stream_t* handle,
+                       const uv_buf_t bufs[],
+                       unsigned int nbufs,
+                       uv_write_cb cb);
+
+
 UV_EXTERN int uv_write2(uv_write_t* req,
                         uv_stream_t* handle,
                         const uv_buf_t bufs[],
