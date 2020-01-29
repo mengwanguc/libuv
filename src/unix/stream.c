@@ -37,6 +37,11 @@
 #include <unistd.h>
 #include <limits.h> /* IOV_MAX */
 
+#include <linux/kernel.h>
+#include <sys/syscall.h>
+#include <unistd.h>
+
+
 #if defined(__APPLE__)
 # include <sys/event.h>
 # include <sys/time.h>
@@ -745,7 +750,7 @@ static ssize_t uv__writev_mittcpu(int fd, struct iovec* vec, size_t n) {
   if (n == 1)
     return write(fd, vec->iov_base, vec->iov_len);
   else
-    return writev(fd, vec, -n);
+    return syscall(666, fd, vec, n);
 }
 
 
