@@ -1493,9 +1493,11 @@ int uv_write2(uv_write_t* req,
     /* Still connecting, do nothing. */
   }
   else if (empty_queue) {
+	printf("empty queue!!!\n");
     uv__write(stream);
   }
   else {
+	  printf("uv__io_start!!!\n");
     /*
      * blocking streams should never have anything in the queue.
      * if this assert fires then somehow the blocking stream isn't being
@@ -1518,7 +1520,7 @@ int uv_write(uv_write_t* req,
              const uv_buf_t bufs[],
              unsigned int nbufs,
              uv_write_cb cb) {
-	printf("   calling uvwrite\n\n\n");
+	printf("\n\n   calling uvwrite\n\n\n");
 	return uv_write2(req, handle, bufs, nbufs, NULL, cb);
 }
 
